@@ -51,10 +51,10 @@ cd /usr/share/nginx/html
 VALIDATE $? "Moving to app directory"
 
 unzip /tmp/frontend.zip
-VALIDATE $? "Uzip catalogue code"
+VALIDATE $? "Uzip forntend code"
 
 cp $SCRIPT_DIR/nginx.config /etc/nginx/nginx.config
 VALIDATE $? "Created Nginx reverse proxy"
 
 systemctl restart nginx
-VALIDATE $? "Restarting catalogue"
+VALIDATE $? "Restarting nginx"
