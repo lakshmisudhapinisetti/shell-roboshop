@@ -25,3 +25,18 @@ VALIDATE(){
         echo -e "$2 ... $G SUCCESS $N" | tee -a $LOGS_FILE
     fi
 }
+
+cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+VALIDATE $? "Added RabbitMQ repo"
+
+dnf install rabbitmq-server -y &>>$LOGS_FILE
+VALIDATE $? " Installing rabbitmq"
+
+systemctl enable rabbitmq-server &>>$LOGS_FOLDER
+systemctl start rabbitmq-server
+VALIDATE $? " Enabling & Starting rabbitmq "
+
+rabbitmqctl add_user roboshop roboshop123 &>>$LOGS_FILE
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOGS_FILE
+VALIDATE $? "created user and given permissions"
+
