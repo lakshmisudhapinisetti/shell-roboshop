@@ -41,7 +41,7 @@ VALIDATE $? "Allowing remote connections"
 sudo sed -i 's/^protected-mode yes/protected-mode no/' /etc/redis/redis.conf
 VALIDATE $? "Changing the mode"
 
-systemctl enable redis 
+systemctl enable redis &>>$LOGS_FILE
 systemctl start redis 
 VALIDATE $? "Enabling & starting the redis"
 
